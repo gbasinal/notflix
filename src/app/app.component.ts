@@ -8,7 +8,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, HeaderComponent, FooterComponent]
+    imports: [RouterOutlet, HeaderComponent, FooterComponent],
 })
 export class AppComponent {
   title = 'notflix';

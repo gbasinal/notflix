@@ -1,0 +1,63 @@
+@import "mixins";
+
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 60px;
+    align-items: center;
+}
+
+.menu-container{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    &__right{
+        button{
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            &.btn-search{
+                margin-right: 15px;
+            }
+            &.btn-profile{
+                img{
+                    border-radius: 4px;
+                    height: 32px;
+                    vertical-align: middle;
+                    width: 32px;
+                }
+            }
+        }
+    }
+}
+
+.logo-container{
+    img{
+        height: 25px;
+        display: block;
+    }     
+}
+
+.menu-navigation-container{
+    display: flex;
+    padding-left: 25px;
+    li{
+        list-style-type: none;
+        margin-left: 20px;
+        &:first-child{
+            margin-left: 0;
+        }
+        a{
+            font-family: 'Segoe UI', sans-serif;
+            @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+        }
+    }
+}
+
+.search-container{
+    display: flex;
+}

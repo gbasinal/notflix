@@ -36,5 +36,31 @@ $notflix-theme: mat.define-theme((
 // @include mat.color-variants-backwards-compatibility($notflix-theme);
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import 'mixins.scss';
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {box-sizing: border-box;}
+body { margin: 0; font-family: "Bebas Neue", Helvetica Neue,"Segoe UI",Roboto,Ubuntu,sans-serif; }
+
+
+h1{
+  @include typography(40px, 3.5vw, 70px, 60px, 4.167vw, 90px);
+}
+
+h2{
+  @include typography(20px, 1.563vw, 40px, 20px, 1.563vw, 40px);
+}
+
+h3{
+  @include typography(20px, 1.4vw, 35px, 20px, 1.25vw, 35px);
+}
+
+h4{
+  @include typography(14px, 0.833vw, 18px, 16px, 1.354vw, 35px);
+}
+
+
+p{
+  @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+}
