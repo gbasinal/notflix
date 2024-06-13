@@ -5,11 +5,8 @@
     display: flex;
     justify-content: space-between;
     height: 70px;
-    padding: 0 60px;
+    padding: 0 clamp(20px, px-to-vw(60px, 1920px), 60px);
     align-items: center;
-    @include media-max(767px){
-        padding : 0 20px;
-    }
 }
 
 .menu-container{
