@@ -7,6 +7,9 @@
     height: 70px;
     padding: 0 60px;
     align-items: center;
+    @include media-max(767px){
+        padding : 0 20px;
+    }
 }
 
 .menu-container{
@@ -48,8 +51,20 @@
     li{
         list-style-type: none;
         margin-left: 20px;
+        cursor: pointer;
         &:first-child{
             margin-left: 0;
+        }
+        @include media-max(767px){
+            display : none;
+        }
+        &.menu-item__toggle{
+            @include media-min(768px) {
+                display: none;
+            }
+            @include media-max(767px){
+                display : inline-block;
+            }
         }
         a{
             font-family: 'Segoe UI', sans-serif;
@@ -60,4 +75,28 @@
 
 .search-container{
     display: flex;
+}
+
+.search-form__container{
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    input {
+        border: none;
+        outline : none;
+        @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+        display: inline-block;
+
+        &:focus {
+            outline : none;
+            border: none;
+        }
+    }
+    button{
+        svg{
+
+        }
+    }
 }

@@ -1,3 +1,7 @@
+@import 'variables';
+
+
+// Typography Mixin
 @mixin typography($font-size-min, $font-size-preferred, $font-size-max, $line-height-min, $line-height-preferred, $line-height-max, $font-weight: null, $font-style: null) {
     font-size: clamp($font-size-min, $font-size-preferred, $font-size-max);
     line-height: clamp($line-height-min, $line-height-preferred, $line-height-max);
@@ -10,3 +14,76 @@
         font-style: $font-style;
     }
 }
+
+// End Typography Mixin
+
+
+// Responsive Breakpoints Mixins
+
+@mixin media-0 {
+  @media (max-width: #{$breakpoint-450 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-450 {
+  @media (min-width: #{$breakpoint-450}) and (max-width: #{$breakpoint-600 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-600 {
+  @media (min-width: #{$breakpoint-600}) and (max-width: #{$breakpoint-768 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-768 {
+  @media (min-width: #{$breakpoint-768}) and (max-width: #{$breakpoint-1024 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-1024 {
+  @media (min-width: #{$breakpoint-1024}) and (max-width: #{$breakpoint-1200 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-1200 {
+  @media (min-width: #{$breakpoint-1200}) and (max-width: #{$breakpoint-1440 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-1440 {
+  @media (min-width: #{$breakpoint-1440}) and (max-width: #{$breakpoint-1600 - 1}) {
+    @content;
+  }
+}
+
+@mixin media-1600 {
+  @media (min-width: #{$breakpoint-1600}) {
+    @content;
+  }
+}
+
+@mixin media-between($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max - 1}) {
+    @content;
+  }
+}
+
+@mixin media-min($min) {
+  @media (min-width: #{$min}) {
+    @content;
+  }
+}
+
+@mixin media-max($max) {
+  @media (max-width: #{$max - 1}) {
+    @content;
+  }
+}
+
+// End Responsive Mixins
