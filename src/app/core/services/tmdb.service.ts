@@ -52,4 +52,11 @@ export class TmdbService {
       .get(`${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}`)
       .pipe(map((response: any) => response));
   }
+
+
+  getAllTrendingMoviesAndShows(): Observable<any>{
+    return this.http
+      .get(`${this.baseUrl}/trending/all/week?api_key=${this.apiKey}`)
+      .pipe(map((response: any) => response.results));
+  }
 }

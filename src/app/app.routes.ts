@@ -9,7 +9,7 @@ import { PopularComponent } from './features/popular/popular.component';
 import { WatchlistComponent } from './features/watchlist/watchlist.component';
 
 export const routes: Routes = [
-    {path : " ", component : HomeComponent},
+    {path : "", component : HomeComponent},
     {path : "details/:id", component : DetailsComponent},
     {path : "search", component : SearchComponent},
     {path : "user", component : UserComponent},

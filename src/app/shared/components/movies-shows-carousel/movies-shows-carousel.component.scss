@@ -1,0 +1,30 @@
+@import "mixins";
+@import 'swiper/swiper-bundle.css';
+.movies-shows-carousel-container{
+    padding: 0 clamp(20px, px-to-vw(60px, 1920px), 60px);
+}
+
+.header-container{
+    h2{
+
+    }
+}
+
+.list-container{
+    .list-item-container{
+        position: relative;
+        .list-item-image-container{
+            margin: 0;
+            img {
+                // height: 165px;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .list-item-text-container{
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+        }
+    }
+}
