@@ -64,3 +64,9 @@ h4{
 p{
   @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
 }
+
+
+h1,h2,h3,h4,h5,h6, p{
+  margin: 0;
+  padding: 0;
+}

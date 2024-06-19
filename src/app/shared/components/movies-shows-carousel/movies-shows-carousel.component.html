@@ -1,14 +1,18 @@
 <section class="movies-shows-carousel-container">
     <div class="header-container">
-        <h2>Trending</h2>
+        <h2>{{headerTitle}}</h2>
     </div>
-    <swiper-container class="list-container" slides-per-view="6.3">
-        @for (trendingItem of trendingMoviesAndShows; track $index) {
-            <swiper-slide class="list-item-container">
-                <figure class="list-item-image-container">
-                    <img src="https://image.tmdb.org/t/p/w780/{{trendingItem.poster_path}}" alt="{{trendingItem.title}}'s poster">
-                </figure>
-            </swiper-slide>
-        }
-    </swiper-container>
+    @if(trendingMoviesAndShows.length != 0){
+        <swiper-container class="swiper swiper-list-container list-container" #movieShowCarousel 
+            [loop]=true [breakpoints]="breakpoints" [spaceBetween]="10"
+        >
+            @for (trendingItem of trendingMoviesAndShows; track $index) {
+                <swiper-slide class="list-item">
+                    <figure class="list-item-image-container">
+                        <img src="https://image.tmdb.org/t/p/w154/{{trendingItem.poster_path}}" alt="{{trendingItem.title}}'s poster">
+                    </figure>
+                </swiper-slide>
+            }
+        </swiper-container>
+    }
 </section>

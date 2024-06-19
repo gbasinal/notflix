@@ -47,16 +47,61 @@ export class TmdbService {
     return items[randomIndex];
   }
 
+  /**
+   * Fetches detailed information about a specific movie from the TMDB API.
+   *
+   * @param {number} movieId - The unique identifier of the movie.
+   * @returns {Observable<any>} An observable containing the detailed information about the movie.
+   */
   getMovieDetails(movieId: number): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}`)
       .pipe(map((response: any) => response));
   }
 
-
-  getAllTrendingMoviesAndShows(): Observable<any>{
+  /**
+   * Fetches a list of all trending movies and TV shows for the current week from the TMDB API.
+   *
+   * @returns {Observable<any>} An observable containing the list of trending movies and TV shows.
+   * The response is mapped to extract the 'results' property, which contains the array of items.
+   */
+  getAllTrendingMoviesAndShows(): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/trending/all/week?api_key=${this.apiKey}`)
+      .pipe(map((response: any) => response.results));
+  }
+
+  /**
+   * Fetches a sample of images associated with a specific movie from the TMDB API.
+   *
+   * @param {number} movieId - The unique identifier of the movie.
+   * @returns {Observable<any>} An observable containing the sample of images associated with the movie.
+   * The response is mapped to extract the 'results' property, which contains the array of images.
+   */
+  getImageSampleFromMovie(movieId: number): Observable<any> {
+    return this.http
+      .get(`${this.baseUrl}/movie/${movieId}/images?api_key=${this.apiKey}`)
+      .pipe(map((response: any) => response.results));
+  }
+
+  getNowPlayingMovies(region: string): Observable<any> {
+    const url = `${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}${region ? `&region=${region} ` : ''}`
+    return this.http
+      .get(url)
+      .pipe(map((response: any) => response.results));
+  }
+
+  getUpcomingMovies(region: string): Observable<any> {
+    const url = `${this.baseUrl}/movie/upcoming?api_key=${this.apiKey}${region ? `&region=${region}` : ''}`;
+    return this.http
+      .get(url)
+      .pipe(map((response: any) => response.results));
+  }
+
+  getTopRatedMovies(region : string): Observable<any>{
+    const url = `${this.baseUrl}/movie/top_rated?api_key=${this.apiKey}${region ? `&region=${region} ` : ''}`
+    return this.http
+      .get(url)
       .pipe(map((response: any) => response.results));
   }
 }

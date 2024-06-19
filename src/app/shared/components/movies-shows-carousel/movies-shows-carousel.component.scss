@@ -1,24 +1,33 @@
 @import "mixins";
 @import 'swiper/swiper-bundle.css';
 .movies-shows-carousel-container{
-    padding: 0 clamp(20px, px-to-vw(60px, 1920px), 60px);
+    padding: clamp(30px, 3vw, 50px) clamp(20px, px-to-vw(60px, 1920px), 60px) 0;
+    // &:last-child{
+    //     padding-bottom: clamp(30px, 3vw, 50px);
+    // }
 }
 
 .header-container{
     h2{
-
+        margin-bottom: 20px;
     }
 }
 
 .list-container{
-    .list-item-container{
+    .list-item{
         position: relative;
+        // max-width: 150px;
+        // margin-right: 20px;
+        border-radius: 8px;
         .list-item-image-container{
             margin: 0;
+            border-radius: 8px;
             img {
-                // height: 165px;
+                height: clamp(215px, px-to-vw(225px, 1920px), 225px);
+                border-radius: 8px;
+                // object-fit: cover;
                 width: 100%;
-                object-fit: cover;
+                aspect-ratio: 16/9;
             }
         }
         .list-item-text-container{

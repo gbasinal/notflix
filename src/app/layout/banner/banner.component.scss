@@ -33,12 +33,14 @@
         color: white;
         text-shadow: 2px 2px 4px rgba(0,0,0,.45);
         @include typography(50px, 3.906vw, 85px, 45px, 3.5vw, 80px);
+        margin-bottom: 15px;
     }
     p{
        @include ff-helvetica;
        color: white;
        text-shadow: 2px 2px 4px rgba(0,0,0,.45);
        @include typography(14px, 1.2vw, 28px, 14px, 1.2vw, 28px);
+       margin-bottom: 25px;
     }
     .btn-banner{
         background-color: rgba(109, 109, 110, 0.7);

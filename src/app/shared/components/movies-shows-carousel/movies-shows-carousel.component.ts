@@ -1,6 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { register as registerSwiperElements  } from 'swiper/element/bundle';
-import { TmdbService } from '../../../core/services/tmdb.service';
 
 
 registerSwiperElements()
@@ -13,18 +12,35 @@ registerSwiperElements()
   styleUrl: './movies-shows-carousel.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MoviesShowsCarouselComponent implements OnInit  {
-  trendingMoviesAndShows: any[] = [];
+export class MoviesShowsCarouselComponent {
 
-  constructor(
-    private tmdbService: TmdbService,
-  ) {}
-
-  ngOnInit(): void {
-    this.tmdbService.getAllTrendingMoviesAndShows().subscribe((response) => {
-      console.log(response);
-      this.trendingMoviesAndShows = response;
-      console.log(this.trendingMoviesAndShows)
-    });
+  
+  breakpoints = {
+    0 : {
+      slidesPerView : 1.5
+    },
+    450 : {
+      slidesPerView : 2.3
+    },
+    640: {
+      slidesPerView : 4.3
+    },
+    900: {
+      slidesPerView : 5.3
+    },
+    1024: {
+      slidesPerView : 6.3
+    },
+    1280: {
+      slidesPerView : 8.3
+    },
+    1600: {
+      slidesPerView : 10.3
+    }
   }
+
+  @Input() headerTitle: string= "";
+  @Input() trendingMoviesAndShows: any[] = [];
+
+
 }
