@@ -63,7 +63,6 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
       this.renderer.listen(item.nativeElement, 'mouseover', (event: MouseEvent) => {
         debouncedHover(event,this.moviesAndShowsArray[index]);
         this.indexCount = index;
-        console.log("asdkjashdkjash")
       })
     })
   }

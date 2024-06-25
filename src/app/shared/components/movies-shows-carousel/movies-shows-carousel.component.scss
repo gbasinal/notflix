@@ -35,6 +35,9 @@
                 // object-fit: cover;
                 width: 100%;
                 aspect-ratio: 16/9;
+                @include media-max(450px){
+                    height: 275px;
+                }
             }
         }
         .list-item-text-container{

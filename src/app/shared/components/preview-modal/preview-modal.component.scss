@@ -15,6 +15,9 @@
         opacity: 1;
         visibility: visible;
     }
+    @include media-max(450px){
+        left: 60px !important;
+    }
 }
 
 .image-container{
