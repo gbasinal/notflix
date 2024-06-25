@@ -38,10 +38,15 @@ $notflix-theme: mat.define-theme((
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import 'mixins.scss';
+@import 'variables.scss';
 
 html, body { height: 100%; }
 * {box-sizing: border-box;}
-body { margin: 0; font-family: "Bebas Neue", Helvetica Neue,"Segoe UI",Roboto,Ubuntu,sans-serif; }
+body { 
+  margin: 0;
+  font-family: "Bebas Neue", Helvetica Neue,"Segoe UI",Roboto,Ubuntu,sans-serif; 
+  background-color: $primary-color;
+}
 
 
 h1{

@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
+
+// Components
 import { MoviesShowsCarouselComponent } from '../../shared/components/movies-shows-carousel/movies-shows-carousel.component';
+import { PreviewModalComponent } from '../../shared/components/preview-modal/preview-modal.component';
+// Services
 import { TmdbService } from '../../core/services/tmdb.service';
 import { LocaleService } from '../../core/services/locale.service';
-import { async } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MoviesShowsCarouselComponent],
+  imports: [MoviesShowsCarouselComponent, PreviewModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

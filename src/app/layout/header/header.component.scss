@@ -66,6 +66,7 @@
         a{
             font-family: 'Segoe UI', sans-serif;
             @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+            color : $secondary-color;
         }
     }
 }
