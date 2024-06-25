@@ -2,6 +2,7 @@
 @import 'swiper/swiper-bundle.css';
 .movies-shows-carousel-container{
     padding: clamp(30px, 3vw, 50px) clamp(20px, px-to-vw(60px, 1920px), 60px) 0;
+    margin-bottom: clamp(20px, 2vw, 40px);
     // &:last-child{
     //     padding-bottom: clamp(30px, 3vw, 50px);
     // }

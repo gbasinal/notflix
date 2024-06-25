@@ -1,5 +1,5 @@
 @if(item){
-    <div class="modal-container" [style.left.px]="(itemPosition.left) - 30">
+    <div class="modal-container" [style.left.px]="indexCount == 0 ? 60 : (itemPosition.left) - 30" [@previewModalAnimation]="isVisible ? 'visible' : 'void'" (mouseleave)="resetModal()">
         <figure class="image-container">
             <img src="{{baseImgUrl+item.backdrop_path}}" alt="{{itemType == 'movie' ? item.title : item.name}}' image" />
         </figure>
@@ -11,9 +11,11 @@
             </div>
             <div class="details-container">
                 @if(itemType === "movie"){
+                    <p class="title"><strong>{{item.title}}</strong> |</p>
                     <p class="duration">{{item.runtime | minutesToHours}}</p>
                 }
                 @if(itemType === "tv"){
+                    <p class="title"><strong>{{item.name}}</strong> |</p>
                     @if(item.number_of_seasons === 1){
                         <p class="seasons">{{item.number_of_episodes}} Episodes</p>
                     }

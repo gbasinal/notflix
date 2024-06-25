@@ -25,6 +25,7 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   hoveredItem : any;
   itemType : string = "movie";
   itemPosition : any;
+  indexCount : number = 0
 
   breakpoints = {
     0 : {
@@ -57,26 +58,28 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   ){}
 
   ngAfterViewInit() : void {
-    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),500)
+    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),150)
     this.itemSliders.forEach((item, index) => {
       this.renderer.listen(item.nativeElement, 'mouseover', (event: MouseEvent) => {
         debouncedHover(event,this.moviesAndShowsArray[index]);
+        this.indexCount = index;
+        console.log("asdkjashdkjash")
       })
     })
   }
-
+  
   getSliderPostionOnHover(ev : MouseEvent, item : any){
     const rect = (ev.target as HTMLElement).getBoundingClientRect();
     this.itemPosition = rect;
     if(item.media_type === 'movie'){
       this.TMDBService.getMovieDetails(item.id).subscribe(movieDetails => {
-        console.log(movieDetails)
+        // console.log(movieDetails)
         this.itemType = "movie";
         this.hoveredItem = movieDetails;
       })
     }else {
       this.TMDBService.getTvShowSeriesDetails(item.id).subscribe(tvDetails => {
-        console.log(tvDetails)
+        // console.log(tvDetails)
         this.itemType = "tv";
         this.hoveredItem = tvDetails;
       })
