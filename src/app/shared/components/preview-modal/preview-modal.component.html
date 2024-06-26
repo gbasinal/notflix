@@ -11,17 +11,17 @@
             </div>
             <div class="details-container">
                 @if(itemType === "movie"){
-                    <p class="title"><strong>{{item.title}}</strong> |</p>
-                    <p class="duration">{{item.runtime | minutesToHours}}</p>
+                    <p class="title"><strong>{{item.title}}</strong></p>
+                    <!-- <p class="duration">{{item.runtime | minutesToHours}}</p> -->
                 }
                 @if(itemType === "tv"){
-                    <p class="title"><strong>{{item.name}}</strong> |</p>
-                    @if(item.number_of_seasons === 1){
+                    <p class="title"><strong>{{item.name}}</strong></p>
+                    <!-- @if(item.number_of_seasons === 1){
                         <p class="seasons">{{item.number_of_episodes}} Episodes</p>
                     }
                     @else{
                         <p class="seasons">{{item.number_of_seasons}} Seasons</p>
-                    }
+                    } -->
                     
                 }
                 @if(item.vote_average){
@@ -41,8 +41,11 @@
                     }
                     
                 }
+                <div class="overview-container">
+                    <p class="overview">{{item.overview | truncate : 250}}</p>
+                </div>
                 <ul class="genre">
-                    @for(genre of item.genres; track $index){
+                    @for(genre of filteredGenres; track $index){
                         <li class="genre">{{genre.name}}</li>
                     }
                     

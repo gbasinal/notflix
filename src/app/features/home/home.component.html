@@ -1,6 +1,6 @@
 <section class="slider-container">
-    <app-movies-shows-carousel [moviesAndShowsArray]="trendingMoviesAndShows" headerTitle="Trending"></app-movies-shows-carousel>
-    <app-movies-shows-carousel [moviesAndShowsArray]="upcomingMovies" headerTitle="Upcoming"></app-movies-shows-carousel>
-    <app-movies-shows-carousel [moviesAndShowsArray]="topRatedMovies" headerTitle="Top Rated Movies of All Time"></app-movies-shows-carousel>
-    <app-movies-shows-carousel [moviesAndShowsArray]="nowPlayingMovies" headerTitle="Now Playing on Theaters"></app-movies-shows-carousel>
+    <app-movies-shows-carousel [moviesAndShowsArray]="trendingMoviesAndShows" headerTitle="Trending" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel [moviesAndShowsArray]="upcomingMovies" headerTitle="Upcoming" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel [moviesAndShowsArray]="topRatedMovies" headerTitle="Top Rated Movies of All Time" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel [moviesAndShowsArray]="nowPlayingMovies" headerTitle="Now Playing on Theaters" [genresArray]="allGenres"></app-movies-shows-carousel>
 </section>

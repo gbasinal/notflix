@@ -93,6 +93,12 @@ export class TmdbService {
     return this.http.get(url).pipe(map((response: any) => response.results));
   }
 
+  getAllMovieGenres(): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/genre/movie/list?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.genres));
+  }
+
   // END Movies Related Services //////////////////////////////////////////////////////////////////
 
   // TV Shows Related Services //////////////////////////////////////////////////////////////////
@@ -119,6 +125,12 @@ export class TmdbService {
     return this.http
       .get(`${this.baseUrl}/tv/${tvShowId}?api_key=${this.apiKey}`)
       .pipe(map((response: any) => response));
+  }
+
+  getAllTVGenres(): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/genre/tv/list?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.genres));
   }
 
   // END TV Shows Related Services ///////////////////////////////////////////////////////////////////
@@ -149,4 +161,8 @@ export class TmdbService {
   }
 
   // END Both Movies and TV Shows Related Services //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  
+
 }

@@ -21,6 +21,9 @@ export class HomeComponent {
   upcomingMovies: any[] = [];
   nowPlayingMovies: any[] = [];
   topRatedMovies : any[] = [];
+  movieGenres : any[] = [];
+  tvShowGenres : any[] = [];
+  allGenres : any[] = [];
 
   region : string = '';
   constructor(
@@ -46,6 +49,19 @@ export class HomeComponent {
     this.tmdbService.getTopRatedMovies(this.region).subscribe((response)=>{
       this.topRatedMovies = response;
     })
-    
+
+    this.tmdbService.getAllMovieGenres().subscribe((response)=>{
+      this.movieGenres = response;
+    })
+
+    this.tmdbService.getAllTVGenres().subscribe((response)=>{
+      this.tvShowGenres = response;
+    })
+    this.mergeAllGenres()
+  }
+
+  mergeAllGenres(){
+    const combinedGenres = this.movieGenres.concat(this.tvShowGenres);
+    this.allGenres = combinedGenres.filter((item, index, self) => index === self.findIndex((t) => t.id === item.id));
   }
 }

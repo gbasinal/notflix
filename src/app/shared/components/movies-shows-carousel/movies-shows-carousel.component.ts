@@ -21,11 +21,14 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
 
   @Input() headerTitle: string= "";
   @Input() moviesAndShowsArray: any[] = [];
+  @Input() genresArray: any[] = [];
 
   hoveredItem : any;
   itemType : string = "movie";
   itemPosition : any;
   indexCount : number = 0
+  filteredGenres : any[] = [];
+
 
   breakpoints = {
     0 : {
@@ -58,7 +61,7 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   ){}
 
   ngAfterViewInit() : void {
-    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),150)
+    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),100)
     this.itemSliders.forEach((item, index) => {
       this.renderer.listen(item.nativeElement, 'mouseover', (event: MouseEvent) => {
         debouncedHover(event,this.moviesAndShowsArray[index]);
@@ -70,20 +73,19 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   getSliderPostionOnHover(ev : MouseEvent, item : any){
     const rect = (ev.target as HTMLElement).getBoundingClientRect();
     this.itemPosition = rect;
-    if(item.media_type === 'movie'){
-      this.TMDBService.getMovieDetails(item.id).subscribe(movieDetails => {
-        // console.log(movieDetails)
-        this.itemType = "movie";
-        this.hoveredItem = movieDetails;
-      })
-    }else {
-      this.TMDBService.getTvShowSeriesDetails(item.id).subscribe(tvDetails => {
-        // console.log(tvDetails)
-        this.itemType = "tv";
-        this.hoveredItem = tvDetails;
-      })
-  
+    this.hoveredItem = item;
+    console.log(this.hoveredItem)
+    this.filterGenres(item.genre_ids)
+    if(item.media_type === 'movie' || item.title){
+      this.itemType = "movie";
+    }else if(item.media_type ==="tv" || item.name ) {
+      this.itemType = "tv";
     }
   }
+
+  filterGenres(genreIdArr : number[]){
+    const genres = genreIdArr;
+    this.filteredGenres = this.genresArray.filter(genre => genres.includes(genre.id))
+  } 
 
 }

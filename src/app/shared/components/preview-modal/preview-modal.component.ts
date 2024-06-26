@@ -2,11 +2,12 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 import { MinutesToHoursPipe } from '../../pipes/minutes-to-hours.pipe';
 import { DecimalToPercentagePipe } from '../../pipes/decimal-to-percentage.pipe';
 import {trigger, state, style, transition, animate} from '@angular/animations';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
   selector: 'app-preview-modal',
   standalone: true,
-  imports: [MinutesToHoursPipe, DecimalToPercentagePipe],
+  imports: [MinutesToHoursPipe, DecimalToPercentagePipe, TruncatePipe],
   templateUrl: './preview-modal.component.html',
   styleUrl: './preview-modal.component.scss',
   animations: [
@@ -33,6 +34,7 @@ export class PreviewModalComponent implements AfterViewInit {
   @Input() itemType : string = "";
   @Input() itemPosition : any;
   @Input() indexCount : number = 0 ;
+  @Input() filteredGenres : any[] = [];
 
   @ViewChild('modalItem') modalItem! : ElementRef;
 
