@@ -3,6 +3,7 @@ import { register as registerSwiperElements  } from 'swiper/element/bundle';
 import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 import { TmdbService } from '../../../core/services/tmdb.service';
 import { DebouncerService } from '../../../core/services/debouncer.service';
+import { MoviesShowsMoreInformationModalComponent } from '../movies-shows-more-information-modal/movies-shows-more-information-modal.component';
 
 
 registerSwiperElements()
@@ -10,7 +11,7 @@ registerSwiperElements()
 @Component({
   selector: 'app-movies-shows-carousel',
   standalone: true,
-  imports: [PreviewModalComponent],
+  imports: [PreviewModalComponent, MoviesShowsMoreInformationModalComponent],
   templateUrl: './movies-shows-carousel.component.html',
   styleUrl: './movies-shows-carousel.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -61,10 +62,11 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   ){}
 
   ngAfterViewInit() : void {
-    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),100)
+    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),5)
     this.itemSliders.forEach((item, index) => {
       this.renderer.listen(item.nativeElement, 'mouseover', (event: MouseEvent) => {
-        debouncedHover(event,this.moviesAndShowsArray[index]);
+        // debouncedHover(event,this.moviesAndShowsArray[index]);
+        this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
         this.indexCount = index;
       })
     })
@@ -74,7 +76,6 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
     const rect = (ev.target as HTMLElement).getBoundingClientRect();
     this.itemPosition = rect;
     this.hoveredItem = item;
-    console.log(this.hoveredItem)
     this.filterGenres(item.genre_ids)
     if(item.media_type === 'movie' || item.title){
       this.itemType = "movie";

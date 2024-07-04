@@ -1,8 +1,12 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { MinutesToHoursPipe } from '../../pipes/minutes-to-hours.pipe';
 import { DecimalToPercentagePipe } from '../../pipes/decimal-to-percentage.pipe';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { TmdbService } from '../../../core/services/tmdb.service';
+import {MatDialog, MatDialogRef}  from '@angular/material/dialog'
+import { MoviesShowsMoreInformationModalComponent } from '../movies-shows-more-information-modal/movies-shows-more-information-modal.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-preview-modal',
@@ -15,10 +19,12 @@ import { TruncatePipe } from '../../pipes/truncate.pipe';
       state('void',style({
         opacity: 0,
         visibility: 'hidden',
+        transform: 'scale(.2)'
       })),
       state('visible', style({
         opacity: 1,
         visibility: 'visible',
+        transform: 'translateY(-30%) scale(1.5)'
       })),
       transition('void => visible',[
         animate('0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)')
@@ -41,8 +47,11 @@ export class PreviewModalComponent implements AfterViewInit {
   baseImgUrl : string = "https://image.tmdb.org/t/p/original/";
   rateClass : string = "red"
   isVisible : boolean = false;
+  readonly dialogRef = inject(MatDialog);
 
   constructor(
+    private tmdbService : TmdbService,
+
   ){
 
   }
@@ -66,5 +75,30 @@ export class PreviewModalComponent implements AfterViewInit {
     }else{
       return "red";
     }
+  }
+
+  openMoviesShowsMoreInfoModal(id : number, isMovie : boolean) : void {
+    const fetchDetails = isMovie
+    ? this.tmdbService.getMovieDetails(id)
+    : this.tmdbService.getTvShowSeriesDetails(id);
+
+    const fetchTrailer = isMovie 
+    ? this.tmdbService.getMovieTrailers(id)
+    : this.tmdbService.getTVShowTrailers(id);
+
+    const fetchCredits = isMovie
+    ? this.tmdbService.getMovieCredits(id)
+    : this.tmdbService.getTVShowCredits(id);
+
+
+    forkJoin([fetchDetails,fetchTrailer, fetchCredits]).subscribe(([details, trailer, credits])=> {
+      this.dialogRef.open(MoviesShowsMoreInformationModalComponent,{
+        data : {details, trailer, credits, isMovie},
+        panelClass: 'preview-modal-container'
+      })
+    },(error)=> {
+      console.error('Error fetching details or trailer, try again later', error);
+    })
+
   }
 }

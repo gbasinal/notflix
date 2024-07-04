@@ -9,12 +9,7 @@
     transform: translateY(-30%) scale(1.5);
     box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
     border-radius: 8px;
-    // opacity: 0;
-    // visibility: hidden;
-    &.active-modal {
-        opacity: 1;
-        visibility: visible;
-    }
+    transform-origin: center 30%;
     @include media-max(450px){
         left: 60px !important;
     }

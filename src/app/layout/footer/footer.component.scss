@@ -15,5 +15,6 @@
     a,p{
         font-family: 'Helvetica Neue', sans-serif;
         @include typography(10px, 0.677vw, 14px, 14px, 0.833vw, 18px);
+        color : $secondary-color;
     }
 }

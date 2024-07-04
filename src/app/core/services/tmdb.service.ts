@@ -99,6 +99,18 @@ export class TmdbService {
      .pipe(map((response: any) => response.genres));
   }
 
+  getMovieTrailers(id: number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/movie/${id}/videos?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.results));
+  }
+
+  getMovieCredits(id:  number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/movie/${id}/credits?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.cast));
+  }
+
   // END Movies Related Services //////////////////////////////////////////////////////////////////
 
   // TV Shows Related Services //////////////////////////////////////////////////////////////////
@@ -121,7 +133,7 @@ export class TmdbService {
    * @param {string} tvShowId - The unique identifier of the TV show.
    * @returns {Observable<any>} An observable containing the detailed information about the TV show.
    */
-  getTvShowSeriesDetails(tvShowId: string): Observable<any> {
+  getTvShowSeriesDetails(tvShowId: number): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/tv/${tvShowId}?api_key=${this.apiKey}`)
       .pipe(map((response: any) => response));
@@ -131,6 +143,18 @@ export class TmdbService {
     return this.http
      .get(`${this.baseUrl}/genre/tv/list?api_key=${this.apiKey}`)
      .pipe(map((response: any) => response.genres));
+  }
+
+  getTVShowTrailers(id: number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/tv/${id}/videos?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.results));
+  }
+
+  getTVShowCredits(id:  number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/tv/${id}/credits?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.cast));
   }
 
   // END TV Shows Related Services ///////////////////////////////////////////////////////////////////
