@@ -92,6 +92,7 @@ export class PreviewModalComponent implements AfterViewInit {
 
 
     forkJoin([fetchDetails,fetchTrailer, fetchCredits]).subscribe(([details, trailer, credits])=> {
+      console.log(trailer)
       this.dialogRef.open(MoviesShowsMoreInformationModalComponent,{
         data : {details, trailer, credits, isMovie},
         panelClass: 'preview-modal-container'

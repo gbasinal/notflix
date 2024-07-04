@@ -41,12 +41,13 @@ export class MoviesShowsMoreInformationModalComponent implements OnInit{
     const filteredTrailers = trailers.filter( (trailer)=>{
       return trailer.type == 'Trailer'
     })
-    if(filteredTrailers){
+    if(filteredTrailers.length > 0){
       const filteredTrailer = filteredTrailers[Math.floor(Math.random() * filteredTrailers.length)];
       this.videoSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
         `https://www.youtube.com/embed/${filteredTrailer.key}?autoplay=1&controls=0&mute=1&modestbranding=1&rel=0&showinfo=0`
       );
     }
+    console.log(this.videoSrc)
   }
 
   getVoteCategory(vote : number) {
