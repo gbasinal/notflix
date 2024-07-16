@@ -90,11 +90,15 @@ export class PreviewModalComponent implements AfterViewInit {
     ? this.tmdbService.getMovieCredits(id)
     : this.tmdbService.getTVShowCredits(id);
 
+    const fetchSimilarItems = isMovie
+    ? this.tmdbService.getSimilarMovies(id)
+    : this.tmdbService.getSimilarTVShows(id);
 
-    forkJoin([fetchDetails,fetchTrailer, fetchCredits]).subscribe(([details, trailer, credits])=> {
+
+    forkJoin([fetchDetails,fetchTrailer, fetchCredits, fetchSimilarItems]).subscribe(([details, trailer, credits, similarItems])=> {
       console.log(trailer)
       this.dialogRef.open(MoviesShowsMoreInformationModalComponent,{
-        data : {details, trailer, credits, isMovie},
+        data : {details, trailer, credits, similarItems, isMovie},
         panelClass: 'preview-modal-container'
       })
     },(error)=> {

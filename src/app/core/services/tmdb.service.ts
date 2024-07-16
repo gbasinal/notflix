@@ -111,6 +111,12 @@ export class TmdbService {
      .pipe(map((response: any) => response.cast));
   }
 
+  getSimilarMovies(id: number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/movie/${id}/similar?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.results));
+  }
+
   // END Movies Related Services //////////////////////////////////////////////////////////////////
 
   // TV Shows Related Services //////////////////////////////////////////////////////////////////
@@ -155,6 +161,12 @@ export class TmdbService {
     return this.http
      .get(`${this.baseUrl}/tv/${id}/credits?api_key=${this.apiKey}`)
      .pipe(map((response: any) => response.cast));
+  }
+
+  getSimilarTVShows(id: number): Observable<any>{
+    return this.http
+     .get(`${this.baseUrl}/tv/${id}/similar?api_key=${this.apiKey}`)
+     .pipe(map((response: any) => response.results));
   }
 
   // END TV Shows Related Services ///////////////////////////////////////////////////////////////////

@@ -5,12 +5,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MinutesToHoursPipe } from '../../pipes/minutes-to-hours.pipe';
 import { DecimalToPercentagePipe } from '../../pipes/decimal-to-percentage.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { MoreLikeThisCardComponent } from '../more-like-this-card/more-like-this-card.component';
 
 
 @Component({
   selector: 'app-movies-shows-more-information-modal',
   standalone: true,
-  imports: [DatePipe, MinutesToHoursPipe, DecimalToPercentagePipe, TruncatePipe],
+  imports: [DatePipe, MinutesToHoursPipe, DecimalToPercentagePipe, TruncatePipe, MoreLikeThisCardComponent],
   templateUrl: './movies-shows-more-information-modal.component.html',
   styleUrl: './movies-shows-more-information-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -22,19 +23,19 @@ export class MoviesShowsMoreInformationModalComponent implements OnInit{
   private sanitizer = inject(DomSanitizer);
   casts ! : any[];
   isMovie : boolean = false;
+  similarItems : any[] = [];
 
   ngOnInit(): void {
       this.processData(this.data);
   }
 
   processData(data : any) : void {
-    const {details , trailer, credits, isMovie} = data;
+    const {details , trailer, credits, similarItems, isMovie} = data;
     this.details = details;
-    console.log(details);
     this.casts = credits.slice(0,5);
-    console.log(this.casts)
     this.processTrailer(trailer);
     this.isMovie = isMovie;
+    this.similarItems = similarItems.slice(0, 9);
   }
 
   processTrailer(trailers : any[]): void {
@@ -47,7 +48,6 @@ export class MoviesShowsMoreInformationModalComponent implements OnInit{
         `https://www.youtube.com/embed/${filteredTrailer.key}?autoplay=1&controls=0&mute=1&modestbranding=1&rel=0&showinfo=0`
       );
     }
-    console.log(this.videoSrc)
   }
 
   getVoteCategory(vote : number) {

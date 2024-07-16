@@ -77,11 +77,25 @@ h1,h2,h3,h4,h5,h6, p{
 }
 
 
+.cdk-global-overlay-wrapper{
+    overflow-y: scroll;
+}
+
+
+
 .preview-modal-container{
   max-width: 850px !important;
   width: 100%;
+  // Hack to have a top padding for the modal 
+  margin-top: 50px;
   .mat-mdc-dialog-surface{
     background-color: $dark1;
-    border-radius: 0;
+    border-radius: 15px;
   }
+}
+
+
+// Hack for removing the scrollbar when a pop up is opened
+.cdk-global-scrollblock {
+  overflow-y: hidden;
 }

@@ -78,4 +78,12 @@
             </div>
         </div>
     </div>
+    <div class="more-like-this-container">
+        <h2>More Like This</h2>
+        <div class="more-like-this-wrapper">
+            
+            @for(item of similarItems; track $index;){
+                <app-more-like-this-card [item]="item" [isMovie]="isMovie"></app-more-like-this-card>
+            }
+    </div>
 </div>

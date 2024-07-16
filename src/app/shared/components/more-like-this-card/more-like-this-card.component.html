@@ -1,0 +1,35 @@
+<div class="movie-series-card-container">
+    <figure class="image-container">
+        <img src="https://image.tmdb.org/t/p/original/{{item.poster_path}}" alt="{{item.title}}'s poster">
+    </figure>
+    <div class="description-container">
+        <div class="header-container">
+            <div class="year-rate-container">
+                @if(item.vote_average){
+                    @switch (getVoteCategory(item.vote_average)) {
+                        @case('green'){
+                            <p class="average green">{{item.vote_average | decimalToPercentage}}</p>
+                        }
+                        @case('yellow'){
+                            <p class="average yellow">{{item.vote_average | decimalToPercentage}}</p>
+                        }
+                        @case('orange'){
+                            <p class="average orange">{{item.vote_average | decimalToPercentage}}</p>
+                        }
+                        @default{
+                            <p class="average red">{{item.vote_average | decimalToPercentage}}</p>
+                        }
+                    }
+                    
+                }
+                <span class="year-released">{{ isMovie ? [item.release_date  | date : 'yyyy'] : [item.first_air_date | date : 'yyyy']}}</span>
+            </div>
+            <span class="add-to-watchlist"><svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" viewBox="0 0 24 24" role="img" data-icon="PlusStandard" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 11V2H13V11H22V13H13V22H11V13H2V11H11Z" fill="#e5e5e5"></path></svg></span>
+        </div>
+        <div class="overview-container">
+            @if(item.overview){
+                <p class="overview">{{item.overview | truncate : 100}} <span><a href=""> More</a></span></p>
+            }
+        </div>
+    </div>
+</div>
