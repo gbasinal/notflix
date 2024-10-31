@@ -27,10 +27,10 @@ import { forkJoin } from 'rxjs';
         transform: 'translateY(-30%) scale(1.5)'
       })),
       transition('void => visible',[
-        animate('0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)')
+        animate('.2s cubic-bezier(.17,.67,.66,.71)')
       ]),
       transition('visible => void',[
-        animate('0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)')
+        animate('.3s cubic-bezier(.17,.67,.66,.71)')
       ])
     ])
   ]

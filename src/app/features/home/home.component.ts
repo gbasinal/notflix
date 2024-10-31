@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // Components
 import { MoviesShowsCarouselComponent } from '../../shared/components/movies-shows-carousel/movies-shows-carousel.component';
@@ -14,7 +14,8 @@ import { LocaleService } from '../../core/services/locale.service';
   standalone: true,
   imports: [MoviesShowsCarouselComponent, PreviewModalComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent {
   trendingMoviesAndShows: any[] = [];
@@ -24,6 +25,8 @@ export class HomeComponent {
   movieGenres : any[] = [];
   tvShowGenres : any[] = [];
   allGenres : any[] = [];
+
+  isHoveredTitle : any = '';
 
   region : string = '';
   constructor(
@@ -63,5 +66,10 @@ export class HomeComponent {
   mergeAllGenres(){
     const combinedGenres = this.movieGenres.concat(this.tvShowGenres);
     this.allGenres = combinedGenres.filter((item, index, self) => index === self.findIndex((t) => t.id === item.id));
+  }
+
+  checkOnHoverOfItem(title : any) {
+    this.isHoveredTitle = title;
+    console.log(this.isHoveredTitle)
   }
 }

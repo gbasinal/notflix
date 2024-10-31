@@ -8,6 +8,7 @@ import { MoviesComponent } from './features/movies/movies.component';
 import { PopularComponent } from './features/popular/popular.component';
 import { WatchlistComponent } from './features/watchlist/watchlist.component';
 import { MoviesShowsMoreInformationModalComponent } from './shared/components/movies-shows-more-information-modal/movies-shows-more-information-modal.component';
+import { TestComponent } from './shared/test/test.component';
 
 export const routes: Routes = [
     {path : "", component : HomeComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path : "watchlist", component : WatchlistComponent},
 
     // TEST Components
-    {path: "modal-test", component: MoviesShowsMoreInformationModalComponent}
+    {path: "modal-test", component: MoviesShowsMoreInformationModalComponent},
+    {path: "test", component: TestComponent}
 ];
 

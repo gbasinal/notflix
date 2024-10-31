@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChildren,AfterViewInit, QueryList, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, Output, EventEmitter, OnInit, Renderer2, ViewChildren,AfterViewInit, QueryList, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { register as registerSwiperElements  } from 'swiper/element/bundle';
 import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 import { TmdbService } from '../../../core/services/tmdb.service';
@@ -24,6 +24,8 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   @Input() moviesAndShowsArray: any[] = [];
   @Input() genresArray: any[] = [];
 
+  @Output() selectedCarouselTitle = new EventEmitter<any>();
+
   hoveredItem : any;
   itemType : string = "movie";
   itemPosition : any;
@@ -33,7 +35,7 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
 
   breakpoints = {
     0 : {
-      slidesPerView : 1.5
+      slidesPerView : 2.1
     },
     450 : {
       slidesPerView : 2.3
@@ -59,16 +61,23 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
     private renderer: Renderer2,
     private TMDBService: TmdbService,
     private debouncerService : DebouncerService,
+    private cdr : ChangeDetectorRef
   ){}
 
   ngAfterViewInit() : void {
-    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),5)
+    // const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),3)
     this.itemSliders.forEach((item, index) => {
-      this.renderer.listen(item.nativeElement, 'mouseover', (event: MouseEvent) => {
+      this.renderer.listen(item.nativeElement, 'pointerenter', (event: PointerEvent) => {
         // debouncedHover(event,this.moviesAndShowsArray[index]);
         this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
         this.indexCount = index;
+        this.selectedCarouselTitle.emit(this.headerTitle);
+        this.cdr.detectChanges();
       })
+      this.renderer.listen(item.nativeElement, 'pointerenter', () => {
+        this.selectedCarouselTitle.emit(this.headerTitle); 
+        this.cdr.detectChanges();
+      });
     })
   }
   
