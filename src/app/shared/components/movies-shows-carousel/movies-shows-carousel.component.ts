@@ -4,6 +4,8 @@ import { PreviewModalComponent } from '../preview-modal/preview-modal.component'
 import { TmdbService } from '../../../core/services/tmdb.service';
 import { DebouncerService } from '../../../core/services/debouncer.service';
 import { MoviesShowsMoreInformationModalComponent } from '../movies-shows-more-information-modal/movies-shows-more-information-modal.component';
+import { DeviceService } from '../../../core/services/device.service';
+import { ShowMoreInfoModalService } from '../../../core/services/show-more-info-modal.service';
 
 
 registerSwiperElements()
@@ -61,7 +63,9 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
     private renderer: Renderer2,
     private TMDBService: TmdbService,
     private debouncerService : DebouncerService,
-    private cdr : ChangeDetectorRef
+    private cdr : ChangeDetectorRef,
+    private deviceService : DeviceService,
+    private showMoreInfoModalService : ShowMoreInfoModalService
   ){}
 
   ngAfterViewInit() : void {
@@ -69,12 +73,19 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
     this.itemSliders.forEach((item, index) => {
       this.renderer.listen(item.nativeElement, 'pointerenter', (event: PointerEvent) => {
         // debouncedHover(event,this.moviesAndShowsArray[index]);
-        this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
-        this.indexCount = index;
-        this.selectedCarouselTitle.emit(this.headerTitle);
+        let isMovie = this.moviesAndShowsArray[index].media_type === 'movie';
+
+        if(!this.deviceService.isMobile){
+          this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
+          this.indexCount = index;
+          this.selectedCarouselTitle.emit(this.headerTitle);
+        }else{
+          this.showMoreInfoModalService.openMoviesShowsMoreInfoDialog(this.moviesAndShowsArray[index].id, isMovie)
+        }
+
         this.cdr.detectChanges();
       })
-      this.renderer.listen(item.nativeElement, 'pointerenter', () => {
+      this.renderer.listen(item.nativeElement, 'pointerleave', () => {
         this.selectedCarouselTitle.emit(this.headerTitle); 
         this.cdr.detectChanges();
       });

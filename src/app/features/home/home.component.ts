@@ -70,6 +70,5 @@ export class HomeComponent {
 
   checkOnHoverOfItem(title : any) {
     this.isHoveredTitle = title;
-    console.log(this.isHoveredTitle)
   }
 }

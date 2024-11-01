@@ -7,6 +7,7 @@ import { TmdbService } from '../../../core/services/tmdb.service';
 import {MatDialog, MatDialogRef}  from '@angular/material/dialog'
 import { MoviesShowsMoreInformationModalComponent } from '../movies-shows-more-information-modal/movies-shows-more-information-modal.component';
 import { forkJoin } from 'rxjs';
+import { ShowMoreInfoModalService } from '../../../core/services/show-more-info-modal.service';
 
 @Component({
   selector: 'app-preview-modal',
@@ -51,7 +52,7 @@ export class PreviewModalComponent implements AfterViewInit {
 
   constructor(
     private tmdbService : TmdbService,
-
+    private showMoreInfoModalService : ShowMoreInfoModalService
   ){
 
   }
@@ -78,32 +79,6 @@ export class PreviewModalComponent implements AfterViewInit {
   }
 
   openMoviesShowsMoreInfoModal(id : number, isMovie : boolean) : void {
-    const fetchDetails = isMovie
-    ? this.tmdbService.getMovieDetails(id)
-    : this.tmdbService.getTvShowSeriesDetails(id);
-
-    const fetchTrailer = isMovie 
-    ? this.tmdbService.getMovieTrailers(id)
-    : this.tmdbService.getTVShowTrailers(id);
-
-    const fetchCredits = isMovie
-    ? this.tmdbService.getMovieCredits(id)
-    : this.tmdbService.getTVShowCredits(id);
-
-    const fetchSimilarItems = isMovie
-    ? this.tmdbService.getSimilarMovies(id)
-    : this.tmdbService.getSimilarTVShows(id);
-
-
-    forkJoin([fetchDetails,fetchTrailer, fetchCredits, fetchSimilarItems]).subscribe(([details, trailer, credits, similarItems])=> {
-      console.log(trailer)
-      this.dialogRef.open(MoviesShowsMoreInformationModalComponent,{
-        data : {details, trailer, credits, similarItems, isMovie},
-        panelClass: 'preview-modal-container'
-      })
-    },(error)=> {
-      console.error('Error fetching details or trailer, try again later', error);
-    })
-
+    this.showMoreInfoModalService.openMoviesShowsMoreInfoDialog(id, isMovie);
   }
 }
