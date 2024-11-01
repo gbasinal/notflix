@@ -69,14 +69,15 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   ){}
 
   ngAfterViewInit() : void {
-    // const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),3)
+    const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),2)
     this.itemSliders.forEach((item, index) => {
       this.renderer.listen(item.nativeElement, 'pointerenter', (event: PointerEvent) => {
-        // debouncedHover(event,this.moviesAndShowsArray[index]);
+        
         let isMovie = this.moviesAndShowsArray[index].media_type === 'movie';
 
         if(!this.deviceService.isMobile){
-          this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
+          debouncedHover(event,this.moviesAndShowsArray[index]);
+          // this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
           this.indexCount = index;
           this.selectedCarouselTitle.emit(this.headerTitle);
         }else{
