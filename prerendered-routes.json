@@ -1,0 +1,13 @@
+{
+  "routes": [
+    "/",
+    "/modal-test",
+    "/movies",
+    "/popular",
+    "/search",
+    "/test",
+    "/tv-shows",
+    "/user",
+    "/watchlist"
+  ]
+}

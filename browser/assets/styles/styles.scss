@@ -1,0 +1,103 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$notflix-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($notflix-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($notflix-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($notflix-theme);
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import 'mixins.scss';
+@import 'variables.scss';
+
+html, body { height: 100%; }
+* {box-sizing: border-box;}
+body { 
+  margin: 0;
+  font-family: "Bebas Neue", Helvetica Neue,"Segoe UI",Roboto,Ubuntu,sans-serif; 
+  background-color: $primary-color;
+}
+
+
+h1{
+  @include typography(40px, 3.5vw, 70px, 60px, 4.167vw, 90px);
+}
+
+h2{
+  @include typography(20px, 1.563vw, 40px, 20px, 1.563vw, 40px);
+}
+
+h3{
+  @include typography(20px, 1.4vw, 35px, 20px, 1.25vw, 35px);
+}
+
+h4{
+  @include typography(14px, 0.833vw, 18px, 16px, 1.354vw, 35px);
+}
+
+
+p{
+  @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+}
+
+
+h1,h2,h3,h4,h5,h6, p{
+  margin: 0;
+  padding: 0;
+}
+
+
+.cdk-global-overlay-wrapper{
+    overflow-y: scroll;
+}
+
+
+
+.preview-modal-container{
+  max-width: 850px !important;
+  width: 100%;
+  // Hack to have a top padding for the modal 
+  margin-top: 50px;
+  display: flex !important;
+  align-items: flex-start !important;
+  .mat-mdc-dialog-surface{
+    background-color: $dark1;
+    border-radius: 15px;
+  }
+}
+
+
+// Hack for removing the scrollbar when a pop up is opened
+.cdk-global-scrollblock {
+  overflow-y: hidden;
+}
