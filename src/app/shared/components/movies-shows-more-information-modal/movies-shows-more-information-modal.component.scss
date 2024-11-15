@@ -1,0 +1,189 @@
+@import "mixins";
+
+
+.preview-modal-container{
+    height: 90vh;
+    width: 850px;
+    background-color: $dark1;
+}
+
+.trailer-container{
+    position: relative;
+    
+}
+
+.image-container{
+    margin: 0;
+    img{
+        width: 100%;
+    }
+}
+
+.video-container{
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    iframe {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+    }
+    .video-overlay{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background: linear-gradient(0deg, #181818, transparent 50%);
+        width: 100%;
+        z-index: 9;
+    }
+}
+
+.btn-container{
+    position: absolute;
+    left: clamp(20px, px-to-vw(50px, 1920px), 60px);
+    bottom: 140px;
+    z-index: 9;
+    display: flex;
+    span{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 1px solid $secondary-color;
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: $t-out;
+        &:hover, &:focus{
+            background-color: $secondary-color;
+            svg{
+                path {
+                    fill : $primary-color;
+                }
+            }
+        }
+        svg{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            height: 25px;
+            fill: $secondary-color;
+            transition: $t-out;
+        }
+    }
+}
+
+.details-container{
+    padding: 15px clamp(20px, px-to-vw(50px, 1920px), 60px) clamp(20px, px-to-vw(50px, 1920px), 60px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .details-wrapper{
+        flex: 0 0 clamp(300px, px-to-vw(470px, 1920px), 500px);
+        @include media-max($breakpoint-600){
+            flex: 0 0 100%;
+        }
+        &:first-child{
+            flex: 0 0 100%;
+        }
+        &:last-child{
+            flex: 0 0 250px;
+            @include media-max($breakpoint-600){
+                flex: 0 0 100%;
+            }
+        }
+    }
+    p, span{
+        color: $secondary-color;
+    }
+    p{
+        @include ff-roboto;
+        &.average{
+            @include ff-segoe;
+            border: 1px solid white;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            margin-right: 10px;
+            font-weight: 500;
+            @include typography(12px, px-to-vw(14px, 1920px), 16px, 12px, px-to-vw(14px, 1920px), 16px);
+            &.red {
+                border-color: red;
+                color: red;
+            }
+            &.yellow {
+                border-color: yellow;
+                color: yellow;
+            }
+            &.green {
+                border-color: green;
+                color: green;
+            }
+            &.orange{
+                border-color: orange;
+                color: orange;
+            }
+        }
+        &.overview{
+            @include ff-segoe;
+            @include typography(14px, px-to-vw(16px, 1920px), 18px, 18px, px-to-vw(26px, 1920px), 32px);
+            margin: 15px 0;
+        }
+    }
+    span{
+        display: inline-block;
+        &.duration, &.seasons {
+            @include ff-roboto;
+            @include typography(12px, px-to-vw(14px, 1920px), 16px, 12px, px-to-vw(14px, 1920px), 16px);
+        }
+        &.year-released {
+            margin-right: 10px;
+            @include typography(12px, px-to-vw(14px, 1920px), 16px, 12px, px-to-vw(14px, 1920px), 16px);
+        }
+        &.label {
+            margin-right: 10px;
+        }
+        &.value {
+            opacity: 0.6;
+            margin-right: 5px;
+        }
+    }
+}
+
+
+.cast-container{
+    p{
+        margin : 15px 0;
+    }
+    
+}
+
+
+.more-like-this-container{
+    padding: 15px clamp(20px, px-to-vw(50px, 1920px), 60px) clamp(20px, px-to-vw(50px, 1920px), 60px);
+    h2 {
+        color : $secondary-color;
+        @include typography(18px, px-to-vw(24px, 1920px), 28px, 20px, px-to-vw(28px, 1920px), 30px);
+        @include ff-segoe;
+        margin-bottom: 25px;
+    }
+    .more-like-this-wrapper{
+        display: grid;
+        grid-gap: 1em;
+        grid-template-columns: repeat(3, 1fr);
+        @include media-max($breakpoint-768){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include media-max(450px){
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}

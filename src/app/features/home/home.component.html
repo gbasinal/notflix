@@ -1,0 +1,6 @@
+<section class="slider-container">
+    <app-movies-shows-carousel  class="{{ isHoveredTitle == 'Trending' ? 'active' : '' }}"  (selectedCarouselTitle)="checkOnHoverOfItem($event)" [moviesAndShowsArray]="trendingMoviesAndShows" headerTitle="Trending" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel  class="{{ isHoveredTitle == 'Upcoming' ? 'active' : '' }}"  (selectedCarouselTitle)="checkOnHoverOfItem($event)" [moviesAndShowsArray]="upcomingMovies" headerTitle="Upcoming" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel  class="{{ isHoveredTitle == 'Top Rated Movies of All Time' ? 'active' : '' }}"  (selectedCarouselTitle)="checkOnHoverOfItem($event)" [moviesAndShowsArray]="topRatedMovies" headerTitle="Top Rated Movies of All Time" [genresArray]="allGenres"></app-movies-shows-carousel>
+    <app-movies-shows-carousel  class="{{ isHoveredTitle == 'Now Playing on Theaters' ? 'active' : '' }}"  (selectedCarouselTitle)="checkOnHoverOfItem($event)" [moviesAndShowsArray]="nowPlayingMovies" headerTitle="Now Playing on Theaters" [genresArray]="allGenres"></app-movies-shows-carousel>
+</section>

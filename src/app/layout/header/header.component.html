@@ -1,0 +1,45 @@
+<header class="header-container">
+    <div class="menu-container menu-container__left">
+        <a routerLink="/" class="logo-container"><img src="/assets/images/notflix-logo-v2.png" alt="notflix logo"></a>
+        <ul class="menu-navigation-container">
+            <li class="menu-item menu-item__toggle">
+                <p>Browse</p>
+            </li>
+            <li class="menu-item">
+                <a routerLink="tv-shows">TV Shows</a>
+            </li>
+            <li class="menu-item">
+                <a routerLink="movies">Movies</a>
+            </li>
+            <li class="menu-item">
+                <a routerLink="popular">Popular</a>
+            </li>
+            <li class="menu-item">
+                <a routerLink="watchlist">My List</a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-container menu-container__right">
+        <div class="search-container">
+            @if (isSearchFormHidden) {
+                <button class="btn-search" (click)="revealSearchForm()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" viewBox="0 0 24 24" role="img" data-icon="MagnifyingGlassStandard" aria-hidden="true" class="search-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z" fill="currentColor"></path></svg>
+                </button>
+            }
+            @if (!isSearchFormHidden) {
+                <form action="" class="search-form__container">
+                    <button class="btn-search" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" viewBox="0 0 24 24" role="img" data-icon="MagnifyingGlassStandard" aria-hidden="true" class="search-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z" fill="currentColor"></path></svg>
+                    </button>
+                    <input type="text" placeholder="Title, Genre">
+                </form>
+            }
+
+        </div>
+        <div class="profile-container">
+            <button class="btn-profile">
+                <img src="/assets/images/icons/icon-profile.png" alt="icon for profile">
+            </button>
+        </div>
+    </div>
+</header>

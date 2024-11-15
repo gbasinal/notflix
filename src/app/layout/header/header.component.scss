@@ -1,0 +1,100 @@
+@import "mixins";
+
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 clamp(20px, px-to-vw(60px, 1920px), 60px);
+    align-items: center;
+}
+
+.menu-container{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    &__right{
+        button{
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            &.btn-search{
+                margin-right: 15px;
+            }
+            &.btn-profile{
+                img{
+                    border-radius: 4px;
+                    height: 32px;
+                    vertical-align: middle;
+                    width: 32px;
+                }
+            }
+        }
+    }
+}
+
+.logo-container{
+    img{
+        height: 25px;
+        display: block;
+    }     
+}
+
+.menu-navigation-container{
+    display: flex;
+    padding-left: 25px;
+    li{
+        list-style-type: none;
+        margin-left: 20px;
+        cursor: pointer;
+        &:first-child{
+            margin-left: 0;
+        }
+        @include media-max(767px){
+            display : none;
+        }
+        &.menu-item__toggle{
+            @include media-min(768px) {
+                display: none;
+            }
+            @include media-max(767px){
+                display : inline-block;
+            }
+        }
+        a{
+            font-family: 'Segoe UI', sans-serif;
+            @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+            color : $secondary-color;
+        }
+    }
+}
+
+.search-container{
+    display: flex;
+}
+
+.search-form__container{
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    input {
+        border: none;
+        outline : none;
+        @include typography(12px, 0.729vw, 16px, 16px, 1.042vw, 25px);
+        display: inline-block;
+
+        &:focus {
+            outline : none;
+            border: none;
+        }
+    }
+    button{
+        svg{
+
+        }
+    }
+}

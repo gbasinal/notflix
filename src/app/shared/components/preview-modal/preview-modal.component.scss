@@ -1,0 +1,134 @@
+@import "mixins";
+
+.modal-container{
+    position: absolute;
+    z-index: 1;
+    width: 220px;
+    background-color: $primary-color;
+    top: 50%;
+    transform: translateY(-30%) scale(1.5);
+    box-shadow: rgb(48 46 46) 0px 3px 10px;
+    border-radius: 8px;
+    transform-origin: center 30%;
+    will-change: transform;
+    min-height: 280px;
+    @include media-max(450px){
+        left: 60px !important;
+    }
+}
+
+.image-container{
+    margin: 0;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    img{
+        width: 100%;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        display: block;
+    }
+}
+.content-container{
+    padding: 10px 10px 5px;
+}
+
+.icon-container{
+    margin-bottom: 5px;
+    span{
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $secondary-color;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 7px;
+        cursor: pointer;
+        transition: .25s ease-out;
+        &:hover, &:focus {
+            background-color: $secondary-color;
+            svg{
+                path {
+                    fill : $primary-color;
+                }
+            }
+        }
+        svg{
+            width: 15px;
+            height: 15px;
+            path{
+                transition: .25s ease-out;
+            }
+        }
+    }
+}
+
+.details-container{
+    p, li{
+        color: $secondary-color;
+    }
+    p{
+        font-size: 9px;
+        display: inline-block;
+        margin-right: 5px;
+        opacity: .6;
+        @include ff-helvetica;
+        &.average{
+            border: 1px solid white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            opacity: 1;
+            &.red {
+                border-color: red;
+            }
+            &.yellow {
+                border-color: yellow;
+            }
+            &.green {
+                border-color: green;
+            }
+            &.orange{
+                border-color: orange;
+            }
+        }
+        &.overview {
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+    }
+    ul{
+        display: block;
+        padding: 0;
+        margin: 0;
+        li{
+            list-style-type: none;
+            @include ff-segoe;
+            font-size: 8px;
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: 500;
+            position: relative;
+            line-height: 1;
+            &:not(&:last-child){
+                &::before{
+                    content : "";
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-38%);
+                    background-color: $secondary-color;
+                    border-radius: 50%;
+                    width: 4px;
+                    height: 4px;
+                    right: -7px;
+                    opacity: .5;
+                }
+            }
+
+        }
+    }
+}

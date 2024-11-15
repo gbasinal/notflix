@@ -1,0 +1,49 @@
+@import "mixins";
+@import 'swiper/swiper-bundle.css';
+.movies-shows-carousel-container{
+    padding: clamp(30px, 3vw, 50px) clamp(20px, px-to-vw(60px, 1920px), 60px) 0;
+    margin-bottom: clamp(20px, 2vw, 40px);
+    // &:last-child{
+    //     padding-bottom: clamp(30px, 3vw, 50px);
+    // }
+}
+
+.header-container{
+    h2{
+        margin-bottom: 20px;
+        color: $secondary-color;
+        @include ff-segoe;
+        @include typography(22px, 1.4vw, 35px, 25px, 1.7vw, 40px);
+        font-weight: 500;
+
+    }
+}
+
+.list-container{
+    .list-item{
+        position: relative;
+        // max-width: 150px;
+        // margin-right: 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        .list-item-image-container{
+            margin: 0;
+            border-radius: 8px;
+            img {
+                height: clamp(215px, px-to-vw(225px, 1920px), 225px);
+                border-radius: 8px;
+                // object-fit: cover;
+                width: 100%;
+                aspect-ratio: 16/9;
+                @include media-max(450px){
+                    height: 275px;
+                }
+            }
+        }
+        .list-item-text-container{
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+        }
+    }
+}

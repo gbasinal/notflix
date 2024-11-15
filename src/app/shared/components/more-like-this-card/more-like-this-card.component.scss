@@ -1,0 +1,112 @@
+@import "mixins";
+
+.movie-series-card-container{
+    height: 100%;
+    margin: .1em;
+    min-height: 22em;
+    border-radius: 5px;
+    background-color: $gray1;
+}
+
+.image-container {
+    margin: 0;
+    img{
+        width: 100%;
+        height: 350px;
+        
+        display: inline-block;
+        @include media-min(450px){
+            object-fit: cover;
+        }
+    }
+}
+
+.description-container{
+    padding: 15px;
+    .header-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        p, span{
+            color: $secondary-color;
+        }
+        p{
+            @include ff-roboto;
+            &.average{
+                border: 2px solid white;
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 1;
+                margin-right: 10px;
+                font-weight: 500;
+                @include typography(10px, px-to-vw(12px, 1920px), 14px, 10px, px-to-vw(12px, 1920px), 14px);
+                &.red {
+                    border-color: red;
+                    color: red;
+                }
+                &.yellow {
+                    border-color: yellow;
+                    color: yellow;
+                }
+                &.green {
+                    border-color: green;
+                    color: green;
+                }
+                &.orange{
+                    border-color: orange;
+                    color: orange;
+                }
+            }
+        }
+
+        .add-to-watchlist{
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            border: 1px solid $secondary-color;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 7px;
+            cursor: pointer;
+            transition: .25s ease-out;
+            margin-left: 50px;
+            &:hover, &:focus {
+                background-color: $secondary-color;
+                svg{
+                    path {
+                        fill : $primary-color;
+                    }
+                }
+            }
+            svg{
+                width: 15px;
+                height: 15px;
+                path{
+                    transition: .25s ease-out;
+                }
+            }
+        }
+    }
+    .overview-container{
+        p{
+            color : $secondary-color;
+            @include ff-segoe;
+            @include typography(12px, px-to-vw(14px, 1920px), 16px, 16px, px-to-vw(24px, 1920px), 28px);
+            margin: 15px 0;
+            a{
+                display : inline-block;
+                margin-left: 5px;
+                color : $secondary-color;
+                text-decoration: underline;
+                &:hover, &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+}
