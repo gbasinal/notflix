@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, Output, EventEmitter, OnInit, Renderer2, ViewChildren,AfterViewInit, QueryList, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, Output, EventEmitter, OnInit, Renderer2, ViewChildren,AfterViewInit, QueryList, ViewChild, ChangeDetectorRef, AfterViewChecked  } from '@angular/core';
 import { register as registerSwiperElements  } from 'swiper/element/bundle';
 import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 import { TmdbService } from '../../../core/services/tmdb.service';
@@ -34,6 +34,7 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
   indexCount : number = 0
   filteredGenres : any[] = [];
 
+  private listeners : (()=> void) [] = [];
 
   breakpoints = {
     0 : {
@@ -70,30 +71,68 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
 
   ngAfterViewInit() : void {
     const debouncedHover = this.debouncerService.debounce(this.getSliderPostionOnHover.bind(this),2)
-    this.itemSliders.forEach((item, index) => {
-      this.renderer.listen(item.nativeElement, 'pointerenter', (event: PointerEvent) => {
-        
-        let isMovie = this.moviesAndShowsArray[index].media_type === 'movie';
 
-        if(!this.deviceService.isMobile){
-          debouncedHover(event,this.moviesAndShowsArray[index]);
-          // this.getSliderPostionOnHover(event,this.moviesAndShowsArray[index])
-          this.indexCount = index;
-          this.selectedCarouselTitle.emit(this.headerTitle);
-        }else{
-          this.showMoreInfoModalService.openMoviesShowsMoreInfoDialog(this.moviesAndShowsArray[index].id, isMovie)
-        }
 
-        this.cdr.detectChanges();
+
+
+    this.itemSliders.changes.subscribe((queryList: QueryList<ElementRef>)=>{
+      console.log(queryList.toArray())
+      queryList.toArray().forEach((item, index) => {
+        this.renderer.listen(item.nativeElement, 'pointerenter', (event: PointerEvent) =>{
+          this.handlePointerEnter(event, index, debouncedHover)
+        })
+        this.renderer.listen(item.nativeElement, 'pointerleave', () =>{
+          this.handlePointerLeave();
+        })
       })
-      this.renderer.listen(item.nativeElement, 'pointerleave', () => {
-        this.selectedCarouselTitle.emit(this.headerTitle); 
-        this.cdr.detectChanges();
-      });
     })
+
+
+    if (this.itemSliders.length > 0) {
+      this.itemSliders.toArray().forEach((item, index) => {
+        this.renderer.listen(
+          item.nativeElement,
+          'pointerenter',
+          (event: PointerEvent) => {
+            this.handlePointerEnter(event, index, debouncedHover);
+          }
+        );
+  
+        this.renderer.listen(item.nativeElement, 'pointerleave', () => {
+          this.handlePointerLeave();
+        });
+      });
+    }
+  }
+
+  private handlePointerEnter(
+    event: PointerEvent,
+    index: number,
+    debouncedHover: Function
+  ) {
+    const isMovie = this.moviesAndShowsArray[index]?.media_type === 'movie';
+  
+    if (!this.deviceService.isMobile) {
+      debouncedHover(event, this.moviesAndShowsArray[index]);
+      this.indexCount = index;
+      this.selectedCarouselTitle.emit(this.headerTitle);
+    } else {
+      this.showMoreInfoModalService.openMoviesShowsMoreInfoDialog(
+        this.moviesAndShowsArray[index]?.id,
+        isMovie
+      );
+    }
+  
+    this.cdr.detectChanges();
   }
   
-  getSliderPostionOnHover(ev : MouseEvent, item : any){
+  private handlePointerLeave() {
+    this.selectedCarouselTitle.emit(this.headerTitle);
+    this.cdr.detectChanges();
+  }
+  
+
+  private getSliderPostionOnHover(ev : MouseEvent, item : any){
     const rect = (ev.target as HTMLElement).getBoundingClientRect();
     this.itemPosition = rect;
     this.hoveredItem = item;
@@ -105,7 +144,7 @@ export class MoviesShowsCarouselComponent implements AfterViewInit {
     }
   }
 
-  filterGenres(genreIdArr : number[]){
+  private filterGenres(genreIdArr : number[]){
     const genres = genreIdArr;
     this.filteredGenres = this.genresArray.filter(genre => genres.includes(genre.id))
   } 

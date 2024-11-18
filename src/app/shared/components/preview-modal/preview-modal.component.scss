@@ -10,7 +10,7 @@
     box-shadow: rgb(48 46 46) 0px 3px 10px;
     border-radius: 8px;
     transform-origin: center 30%;
-    will-change: transform;
+    // will-change: transform;
     min-height: 280px;
     @include media-max(450px){
         left: 60px !important;

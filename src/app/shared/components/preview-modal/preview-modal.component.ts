@@ -20,12 +20,14 @@ import { ShowMoreInfoModalService } from '../../../core/services/show-more-info-
       state('void',style({
         opacity: 0,
         visibility: 'hidden',
-        transform: 'scale(.2)'
+        transform: 'scale(.2)',
+        willChange: 'unset'
       })),
       state('visible', style({
         opacity: 1,
         visibility: 'visible',
-        transform: 'translateY(-30%) scale(1.5)'
+        transform: 'translateY(-30%) scale(1.5)',
+        willChange: 'transform'
       })),
       transition('void => visible',[
         animate('.2s cubic-bezier(.17,.67,.66,.71)')
